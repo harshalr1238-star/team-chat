@@ -1,3 +1,4 @@
+
 import { useEffect, useRef, useState } from "react";
 import "./App.css";
 
@@ -57,9 +58,12 @@ function App() {
       return;
     }
 
+    const randomMember =
+      members[Math.floor(Math.random() * members.length)];
+
     const newMessage = {
       id: Date.now(),
-      user: "You",
+      user: randomMember.name,
       time: new Date().toLocaleTimeString([], {
         hour: "2-digit",
         minute: "2-digit",
@@ -117,7 +121,6 @@ function App() {
 
   function handleInputChange(event) {
     const value = event.target.value;
-
     setMessageText(value);
 
     const lastWord = value.split(/\s/).pop();
@@ -138,12 +141,10 @@ function App() {
   }
 
   function getMember(name) {
-    return (
-      members.find((member) => member.name === name) || {
-        name,
-        color: "#635bff",
-      }
-    );
+    return members.find((member) => member.name === name) || {
+      name,
+      color: "#635bff",
+    };
   }
 
   return (
@@ -151,7 +152,6 @@ function App() {
       <header className="topbar">
         <div className="brand">
           <div className="brand-icon">✦</div>
-
           <div>
             <h1>TeamSpace</h1>
             <p>Team Chat</p>
@@ -168,7 +168,6 @@ function App() {
         <section className="chat-header">
           <div className="channel-info">
             <div className="chat-title-icon">#</div>
-
             <div>
               <h2>general</h2>
               <p>Chat with your team and share ideas</p>
@@ -302,7 +301,6 @@ function App() {
                         >
                           {member.name.charAt(0)}
                         </span>
-
                         {member.name}
                       </button>
                     ))}
